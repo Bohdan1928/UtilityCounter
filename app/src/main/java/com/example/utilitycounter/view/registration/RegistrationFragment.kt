@@ -11,20 +11,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import com.example.utilitycounter.R
 import com.example.utilitycounter.model.data.firebase.UserModel
 import com.example.utilitycounter.view.start.StartFragment
 import com.example.utilitycounter.viewModel.RegistrationViewModel
-import com.example.utilitycounter.viewModel.ViewModelFactory
-import org.koin.android.ext.android.get
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment() {
 
-    private val singUpViewModel by viewModels<RegistrationViewModel> {
-        ViewModelFactory(get())
-    }
+    private val singUpViewModel: RegistrationViewModel by viewModel()
 
     private lateinit var btnSignUp: Button
     private lateinit var edtName: EditText
@@ -38,7 +33,6 @@ class RegistrationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
         btnSignUp = view.findViewById(R.id.btn_sign_up)
         edtName = view.findViewById(R.id.edt_name_sign_up)
@@ -66,35 +60,23 @@ class RegistrationFragment : Fragment() {
             if (edtName.text.isNotEmpty()
                 && edtEmail.text.isNotEmpty()
                 && edtPhoneNumber.text.isNotEmpty()
-                && edtPassword.text.isNotEmpty()
-            ) {
-                if (edtRepeatPassword.text.toString() == edtPassword.text.toString()) {
-
-                    val user = UserModel(
-                        edtName.text.toString(),
-                        edtEmail.text.toString(),
-                        edtPhoneNumber.text.toString(),
-                        edtPassword.text.toString()
-                    )
-                    singUpViewModel.registration(user).observe(viewLifecycleOwner) { success ->
-                        if (success) {
-                            Toast.makeText(context, "Реєстрація успішна", Toast.LENGTH_LONG).show()
-                            edtName.text = null
-                            edtEmail.text = null
-                            edtPhoneNumber.text = null
-                            edtPassword.text = null
-                            edtRepeatPassword.text = null
-                        } else {
-                            Toast.makeText(context, "Помилка реєстрації", Toast.LENGTH_LONG).show()
-                            edtName.text = null
-                            edtEmail.text = null
-                            edtPhoneNumber.text = null
-                            edtPassword.text = null
-                            edtRepeatPassword.text = null
-                        }
+                && edtPassword.text.isNotEmpty()) {
+                val user = UserModel(
+                    edtName.text.toString(),
+                    edtEmail.text.toString(),
+                    edtPhoneNumber.text.toString(),
+                    edtPassword.text.toString())
+                singUpViewModel.registration(
+                    user, requireContext(), edtRepeatPassword.text.toString()
+                ).observe(viewLifecycleOwner) { success ->
+                    if (success) {
+                        Toast.makeText(context, "Реєстрація успішна", Toast.LENGTH_LONG).show()
+                        edtName.text = null
+                        edtEmail.text = null
+                        edtPhoneNumber.text = null
+                        edtPassword.text = null
+                        edtRepeatPassword.text = null
                     }
-                } else {
-                    Toast.makeText(context, "Паролі відрізняються", Toast.LENGTH_LONG).show()
                 }
             } else {
                 Toast.makeText(context, "Не всі поля введено", Toast.LENGTH_LONG).show()
