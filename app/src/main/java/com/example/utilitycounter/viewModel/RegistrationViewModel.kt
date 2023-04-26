@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.utilitycounter.R
 import com.example.utilitycounter.model.data.firebase.UserModel
 import com.example.utilitycounter.model.repository.AuthRepo
+import com.example.utilitycounter.view.start.StartFragment
 import kotlinx.coroutines.launch
 
 class RegistrationViewModel(private val authRepo: AuthRepo) : ViewModel() {
@@ -18,14 +20,6 @@ class RegistrationViewModel(private val authRepo: AuthRepo) : ViewModel() {
     fun registration(user: UserModel, context: Context, passwordRepeat: String): LiveData<Boolean> {
         viewModelScope.launch {
             val isSuccess = authRepo.register(user.email, user.password, context, passwordRepeat)
-            _singUpSuccess.value = isSuccess
-        }
-        return _singUpSuccess
-    }
-
-    fun logIn(user: UserModel): LiveData<Boolean>{
-        viewModelScope.launch {
-            val isSuccess = authRepo.login(user.email, user.password)
             _singUpSuccess.value = isSuccess
         }
         return _singUpSuccess

@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment() {
 
-    private val singUpViewModel: RegistrationViewModel by viewModel()
+    private val registrationViewModel: RegistrationViewModel by viewModel()
 
     private lateinit var btnSignUp: Button
     private lateinit var edtName: EditText
@@ -40,9 +40,9 @@ class RegistrationFragment : Fragment() {
         edtEmail = view.findViewById(R.id.edt_email_sign_up)
         edtPassword = view.findViewById(R.id.edt_password_sign_up)
         edtRepeatPassword = view.findViewById(R.id.edt_repeat_password_sign_up)
-        val btnBack: TextView = view.findViewById(R.id.tv_back)
+        val tvBack: TextView = view.findViewById(R.id.tv_back)
 
-        btnBack.setOnClickListener {
+        tvBack.setOnClickListener {
             val startFragment = StartFragment()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.nav_host, startFragment)
@@ -66,7 +66,7 @@ class RegistrationFragment : Fragment() {
                     edtEmail.text.toString(),
                     edtPhoneNumber.text.toString(),
                     edtPassword.text.toString())
-                singUpViewModel.registration(
+                registrationViewModel.registration(
                     user, requireContext(), edtRepeatPassword.text.toString()
                 ).observe(viewLifecycleOwner) { success ->
                     if (success) {

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.utilitycounter.R
+import com.example.utilitycounter.view.recoveryPassword.RecoverPasswordFragment
 import com.example.utilitycounter.view.registration.RegistrationFragment
 
 class StartFragment : Fragment() {
@@ -27,6 +28,14 @@ class StartFragment : Fragment() {
             val registrationFragment = RegistrationFragment()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.nav_host, registrationFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        btnRecoverPassword.setOnClickListener {
+            val recoverPasswordFragment = RecoverPasswordFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_host, recoverPasswordFragment)
                 .addToBackStack(null)
                 .commit()
         }

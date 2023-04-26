@@ -1,7 +1,6 @@
 package com.example.utilitycounter.model.data.firebase
 
 import android.content.Context
-import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import com.example.utilitycounter.model.repository.AuthRepo
@@ -25,8 +24,11 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
             coroutineScope {
                 if (checkValidEmail(email, context)) {
                     if (checkFormatPassword(password, context)) {
-                        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                        flag = true
+                        if (checkValidPassword(password, passwordRepeat, context)) {
+
+                            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                            flag = true
+                        }
                     }
                 }
             }
@@ -48,6 +50,11 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
         firebaseAuth.signOut()
     }
 
+    override suspend fun changePassword(email: String, context: Context): Boolean {
+        return sendMailForResetPassword(email, context)
+    }
+
+
     private suspend fun checkValidEmail(email: String, context: Context): Boolean =
         withContext(Dispatchers.IO) {
             val flag: Boolean
@@ -55,9 +62,7 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
             flag = if (result.signInMethods?.isNotEmpty() == true) {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
-                        context,
-                        "Введений email вже використовується",
-                        Toast.LENGTH_SHORT
+                        context, "Введений email вже використовується", Toast.LENGTH_SHORT
                     ).show()
                 }
                 false
@@ -94,9 +99,7 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
     }
 
     private fun checkValidPassword(
-        password: String,
-        passwordRepeat: String,
-        context: Context
+        password: String, passwordRepeat: String, context: Context
     ): Boolean {
         val flag = if (password == passwordRepeat) {
             true
@@ -106,4 +109,20 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
         }
         return flag
     }
+
+    private suspend fun sendMailForResetPassword(email: String, context: Context): Boolean =
+        withContext(Dispatchers.IO) {
+            if (checkFormatEmail(email, context)) {
+                firebaseAuth.sendPasswordResetEmail(email).await()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        context, "Лист надіслано на електронну пошту", Toast.LENGTH_SHORT
+                    ).show()
+                }
+                return@withContext true
+            } else {
+                return@withContext false
+            }
+        }
+
 }
