@@ -37,11 +37,14 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
         return flag
     }
 
-    override suspend fun login(email: String, password: String): Boolean {
+    override suspend fun login(email: String, password: String, context: Context): Boolean {
         return try {
-            firebaseAuth.signInWithEmailAndPassword(email, password)
+                firebaseAuth.signInWithEmailAndPassword(email, password)
             true
         } catch (e: Exception) {
+            Toast.makeText(
+                context, "Неправильний пароль або email", Toast.LENGTH_SHORT
+            ).show()
             false
         }
     }
