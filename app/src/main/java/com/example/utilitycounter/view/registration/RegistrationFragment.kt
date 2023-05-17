@@ -12,9 +12,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.utilitycounter.R
-import com.example.utilitycounter.model.data.firebase.UserModel
+import com.example.utilitycounter.model.UserModel
 import com.example.utilitycounter.view.start.StartFragment
-import com.example.utilitycounter.viewModel.RegistrationViewModel
+import com.example.utilitycounter.viewmodel.RegistrationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment() {

@@ -1,12 +1,10 @@
-package com.example.utilitycounter.viewModel
+package com.example.utilitycounter.viewmodel
 
 import android.content.Context
-import android.provider.ContactsContract.CommonDataKinds.Email
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.utilitycounter.model.data.firebase.UserModel
 import com.example.utilitycounter.model.repository.AuthRepo
 import kotlinx.coroutines.launch
 

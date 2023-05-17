@@ -14,7 +14,7 @@ import com.example.utilitycounter.R
 import com.example.utilitycounter.view.addAddresses.AddAddressesFragment
 import com.example.utilitycounter.view.recoveryPassword.RecoverPasswordFragment
 import com.example.utilitycounter.view.registration.RegistrationFragment
-import com.example.utilitycounter.viewModel.StartViewModel
+import com.example.utilitycounter.viewmodel.StartViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StartFragment : Fragment() {
@@ -60,7 +60,7 @@ class StartFragment : Fragment() {
             ) {
                 startViewModel.signIn(
                     edtEmailStart.text.toString(),
-                    edtEmailStart.text.toString(),
+                    edtPasswordStart.text.toString(),
                     requireContext()
                 ).observe(viewLifecycleOwner) {
                     if (it) {
