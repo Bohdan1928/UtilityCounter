@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import com.example.utilitycounter.R
 import com.example.utilitycounter.view.start.StartFragment
-import com.example.utilitycounter.viewModel.RecoverPasswordViewModel
+import com.example.utilitycounter.viewmodel.RecoverPasswordViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RecoverPasswordFragment : Fragment() {

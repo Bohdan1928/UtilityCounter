@@ -1,4 +1,4 @@
-package com.example.utilitycounter.model.data.firebase
+package com.example.utilitycounter.model
 
 data class UserModel(
     val name: String,

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.registration.RegistrationFragment">
+    tools:context=".view.addAddresses.AddAddressesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout_add_addresses_menu"
@@ -20,10 +20,10 @@
             android:id="@+id/tv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:background="@drawable/back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_add_addresses"
-            android:layout_marginStart="24dp"/>
+            app:layout_constraintTop_toTopOf="@+id/text_add_addresses" />
 
         <TextView
             android:id="@+id/text_add_addresses"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="72dp"
             android:layout_marginBottom="60dp"
-            android:text="Реєстрація"
+            android:text="Комунальні адреси"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -46,26 +46,54 @@
         android:id="@+id/constraint_layout_addresses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-32dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="-32dp"
         android:layout_marginEnd="16dp"
-        android:elevation="10dp"
         android:background="@drawable/rectangle_8"
-        android:padding="16dp"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint_layout_add_addresses_menu">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_addresses"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/rectangle_8"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout_add_addresses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_layout_addresses">
+
 
         <EditText
             android:id="@+id/edt_name_added_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints="Назва"
             android:background="@drawable/rectangle_4"
-            android:hint="Ім'я користувача *"
+            android:drawableStart="@drawable/location"
+            android:drawablePadding="12dp"
+            android:hint="Вулиця"
             android:inputType="text"
-            android:text="Bohdan"
             android:padding="12dp"
             android:singleLine="true"
+            android:text="Очаківська"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -76,14 +104,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/rectangle_4"
-            android:hint="Email *"
+            android:drawableStart="@drawable/frame"
+            android:drawablePadding="12dp"
+            android:hint="Будинок"
             android:inputType="text"
-            android:text="bbigun2000@gmail.com"
             android:padding="12dp"
             android:singleLine="true"
+            android:text="5"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_name_added_address" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_name_added_address"
+            tools:ignore="TextFields" />
 
         <EditText
             android:id="@+id/edt_apartment_add_address"
@@ -91,55 +123,49 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/rectangle_4"
-            android:hint="Номер телефону *"
+            android:drawableStart="@drawable/key"
+            android:drawablePadding="12dp"
+            android:hint="Квартира"
             android:inputType="text"
-            android:text="0670000000"
             android:padding="12dp"
             android:singleLine="true"
+            android:text="57"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edt_number_of_build_add_address" />
 
-        <EditText
-            android:id="@+id/edt_password_sign_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_4"
-            android:text="1111"
-            android:hint="Пароль *"
-            android:inputType="textPassword"
-            android:padding="12dp"
-            android:singleLine="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_apartment_add_address" />
-
-        <EditText
-            android:id="@+id/edt_repeat_password_sign_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_4"
-            android:hint="Повторіть пароль *"
-            android:text="1111"
-            android:inputType="textPassword"
-            android:padding="12dp"
-            android:singleLine="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_password_sign_up" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <RadioButton
+        android:id="@+id/radio_private_house"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Приватний будинок"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/constraint_layout_add_addresses"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_layout_add_addresses" />
+
     <Button
-        android:id="@+id/btn_sign_up"
+        android:id="@+id/btn_add_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:background="@drawable/rectangle_2"
-        android:layout_margin="16dp"
-        android:text="Зареєструватись"
-        app:layout_constraintTop_toBottomOf="@+id/constraint_layout_addresses"/>
+        android:text="Додати адресу"
+        app:layout_constraintTop_toBottomOf="@+id/radio_private_house" />
+
+    <Button
+        android:id="@+id/btn_remove_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/rectangle_2"
+        android:text="Видалити адресу"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_address" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

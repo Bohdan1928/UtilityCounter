@@ -12,9 +12,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.utilitycounter.R
-import com.example.utilitycounter.model.data.firebase.UserModel
+import com.example.utilitycounter.model.UserModel
 import com.example.utilitycounter.view.start.StartFragment
-import com.example.utilitycounter.viewModel.RegistrationViewModel
+import com.example.utilitycounter.viewmodel.RegistrationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment() {
@@ -35,9 +35,9 @@ class RegistrationFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
         btnSignUp = view.findViewById(R.id.btn_sign_up)
-        edtName = view.findViewById(R.id.edt_name_sign_up)
-        edtPhoneNumber = view.findViewById(R.id.edt_phone_number_sign_up)
-        edtEmail = view.findViewById(R.id.edt_email_sign_up)
+        edtName = view.findViewById(R.id.edt_name_added_address)
+        edtPhoneNumber = view.findViewById(R.id.edt_apartment_add_address)
+        edtEmail = view.findViewById(R.id.edt_number_of_build_add_address)
         edtPassword = view.findViewById(R.id.edt_password_sign_up)
         edtRepeatPassword = view.findViewById(R.id.edt_repeat_password_sign_up)
         val tvBack: TextView = view.findViewById(R.id.tv_back)

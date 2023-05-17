@@ -8,21 +8,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.example.utilitycounter.R
+import com.example.utilitycounter.view.addAddresses.AddAddressesFragment
 import com.example.utilitycounter.view.recoveryPassword.RecoverPasswordFragment
 import com.example.utilitycounter.view.registration.RegistrationFragment
+import com.example.utilitycounter.viewmodel.StartViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StartFragment : Fragment() {
 
+    private val startViewModel: StartViewModel by viewModel()
+
+    private lateinit var btnSignIn: Button
+    private lateinit var edtEmailStart: EditText
+    private lateinit var edtPasswordStart: EditText
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_start, container, false)
-        val btnSignIn: Button = view.findViewById(R.id.btn_sign_in)
+        btnSignIn = view.findViewById(R.id.btn_sign_in)
         val btnRecoverPassword: Button = view.findViewById(R.id.btn_recover_password)
         val tvSignUp: TextView = view.findViewById(R.id.tv_sing_up)
+        edtEmailStart = view.findViewById(R.id.edt_email_sign_in)
+        edtPasswordStart = view.findViewById(R.id.edt_password_sign_in)
 
         tvSignUp.setOnClickListener {
             val registrationFragment = RegistrationFragment()
@@ -43,7 +54,32 @@ class StartFragment : Fragment() {
         btnSignIn.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#426BF9"))
         btnRecoverPassword.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#1CCD9D"))
 
+        btnSignIn.setOnClickListener {
+            if (edtEmailStart.text.isNotEmpty()
+                && edtPasswordStart.text.isNotEmpty()
+            ) {
+                startViewModel.signIn(
+                    edtEmailStart.text.toString(),
+                    edtPasswordStart.text.toString(),
+                    requireContext()
+                ).observe(viewLifecycleOwner) {
+                    if (it) {
+                        val addAddressesFragment = AddAddressesFragment()
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.nav_host, addAddressesFragment)
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                }
+
+            }
+        }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
 }

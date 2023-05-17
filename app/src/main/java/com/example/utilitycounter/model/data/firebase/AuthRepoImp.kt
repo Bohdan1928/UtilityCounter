@@ -1,7 +1,6 @@
 package com.example.utilitycounter.model.data.firebase
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import com.example.utilitycounter.model.repository.AuthRepo
 import com.google.firebase.auth.FirebaseAuth
@@ -37,18 +36,36 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
         return flag
     }
 
-    override suspend fun login(email: String, password: String): Boolean {
-        return try {
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-            true
-        } catch (e: Exception) {
-            false
+    override suspend fun login(email: String, password: String, context: Context): Boolean {
+        var flag = false
+        withContext(Dispatchers.IO) {
+            val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            try {
+                if (result.user != null) {
+                    flag = true
+                }
+            } catch (e: Exception) {
+                Toast.makeText(
+                    context,
+                    "Введено невірний email або пароль",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
         }
+
+        return flag
+    }
+
+
+    override fun getUserId(): String? {
+        return firebaseAuth.uid
     }
 
     override suspend fun logout() {
         firebaseAuth.signOut()
     }
+
 
     override suspend fun changePassword(email: String, context: Context): Boolean {
         return sendMailForResetPassword(email, context)
@@ -71,7 +88,6 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
             }
             flag
         }
-
 
     private fun checkFormatEmail(email: String, context: Context): Boolean {
         val flag: Boolean
@@ -124,5 +140,4 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
                 return@withContext false
             }
         }
-
 }
