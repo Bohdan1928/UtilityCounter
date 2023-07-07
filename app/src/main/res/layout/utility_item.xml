@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <ImageView
+        android:id="@+id/img_utility_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/icon"
+        android:src="@drawable/group_350"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_utility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Водопостачання"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/img_utility_item"
+        app:layout_constraintTop_toTopOf="@+id/img_utility_item" />
+
+    <TextView
+        android:id="@+id/tv_utility_provider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="КП “Дніпроводоканал”"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_utility"
+        app:layout_constraintTop_toBottomOf="@+id/tv_utility" />
+
+    <TextView
+        android:id="@+id/tv_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        android:text="₴ 1464,18"
+        android:textColor="@color/blue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/guide_line"
+        app:layout_constraintTop_toTopOf="@+id/tv_utility" />
+
+    <TextView
+        android:id="@+id/tv_utility_info_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="на 01.01.20"
+        android:textColor="@color/grey"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_sum"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sum" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="17dp"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_utility_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

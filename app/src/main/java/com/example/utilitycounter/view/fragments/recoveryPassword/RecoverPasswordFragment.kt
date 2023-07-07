@@ -1,4 +1,4 @@
-package com.example.utilitycounter.view.recoveryPassword
+package com.example.utilitycounter.view.fragments.recoveryPassword
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -11,8 +11,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.utilitycounter.R
-import com.example.utilitycounter.view.start.StartFragment
-import com.example.utilitycounter.viewmodel.RecoverPasswordViewModel
+import com.example.utilitycounter.view.fragments.start.StartFragment
+import com.example.utilitycounter.viewmodels.RecoverPasswordViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RecoverPasswordFragment : Fragment() {

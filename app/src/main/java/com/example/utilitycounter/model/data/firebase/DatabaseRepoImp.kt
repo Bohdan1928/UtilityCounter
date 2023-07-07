@@ -16,8 +16,9 @@ import kotlinx.coroutines.withContext
 class DatabaseRepoImp(authRepo: AuthRepo, database: FirebaseDatabase) :
     DatabaseRepo {
 
+    private val userRoot = database.getReference("Users")
     private val databaseRef =
-        database.getReference(authRepo.getUserId().toString()).child("streets")
+        userRoot.child(authRepo.getUserId().toString()).child("streets")
 
     override fun addToDb(address: AddressModel, context: Context) {
         val streetRef = databaseRef.push()
@@ -25,7 +26,7 @@ class DatabaseRepoImp(authRepo: AuthRepo, database: FirebaseDatabase) :
     }
 
     override fun removeFromDb() {
-        TODO("Not yet implemented")
+
     }
 
     override suspend fun getAddressesFromDb(): ArrayList<AddressModel> =
@@ -38,4 +39,18 @@ class DatabaseRepoImp(authRepo: AuthRepo, database: FirebaseDatabase) :
             println(arrayList)
             return@withContext ArrayList(arrayList)
         }
+
+    override suspend fun isAddressDuplicate(address: AddressModel): Boolean = withContext(Dispatchers.IO) {
+        val addressHash = address.hashCode()
+        val addresses = databaseRef.get().await().children
+        for (snap in addresses) {
+            val existingAddress = snap.getValue(AddressModel::class.java)
+            if (existingAddress != null && existingAddress.hashCode() == addressHash) {
+                return@withContext true
+            }
+        }
+        return@withContext false
+    }
 }
+
+

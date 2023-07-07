@@ -1,4 +1,4 @@
-package com.example.utilitycounter.view.registration
+package com.example.utilitycounter.view.fragments.registration
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -13,8 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.utilitycounter.R
 import com.example.utilitycounter.model.UserModel
-import com.example.utilitycounter.view.start.StartFragment
-import com.example.utilitycounter.viewmodel.RegistrationViewModel
+import com.example.utilitycounter.view.fragments.start.StartFragment
+import com.example.utilitycounter.viewmodels.RegistrationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.example.utilitycounter.view.start
+package com.example.utilitycounter.view.fragments.start
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -11,10 +11,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.utilitycounter.R
-import com.example.utilitycounter.view.addAddresses.AddAddressesFragment
-import com.example.utilitycounter.view.recoveryPassword.RecoverPasswordFragment
-import com.example.utilitycounter.view.registration.RegistrationFragment
-import com.example.utilitycounter.viewmodel.StartViewModel
+import com.example.utilitycounter.view.fragments.addAddresses.AddAddressesFragment
+import com.example.utilitycounter.view.fragments.recoveryPassword.RecoverPasswordFragment
+import com.example.utilitycounter.view.fragments.registration.RegistrationFragment
+import com.example.utilitycounter.viewmodels.StartViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StartFragment : Fragment() {

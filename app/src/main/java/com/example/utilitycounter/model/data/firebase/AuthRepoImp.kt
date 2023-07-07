@@ -76,7 +76,7 @@ class AuthRepoImp(private val firebaseAuth: FirebaseAuth) : AuthRepo {
         withContext(Dispatchers.IO) {
             val flag: Boolean
             val result = firebaseAuth.fetchSignInMethodsForEmail(email).await()
-            flag = if (result.signInMethods?.isNotEmpty() == true) {
+            flag = if (result.signInMethods.isNullOrEmpty()) {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
                         context, "Введений email вже використовується", Toast.LENGTH_SHORT

@@ -2,4 +2,11 @@
     <string name="app_name">UtilityCounter</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="icon">icon</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_group">Group</string>
+    <string name="title_info">Info</string>
+    <string name="title_counter">Counter</string>
+    <string name="title_user">User</string>
 </resources>

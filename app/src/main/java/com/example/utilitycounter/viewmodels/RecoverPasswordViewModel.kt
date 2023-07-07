@@ -1,4 +1,4 @@
-package com.example.utilitycounter.viewmodel
+package com.example.utilitycounter.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.LiveData

@@ -8,4 +8,6 @@ interface DatabaseRepo {
     fun addToDb(address: AddressModel, context: Context)
     fun removeFromDb()
     suspend fun getAddressesFromDb(): ArrayList<AddressModel>
+    suspend fun isAddressDuplicate(address: AddressModel): Boolean
+
 }

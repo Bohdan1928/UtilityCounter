@@ -1,4 +1,4 @@
-package com.example.utilitycounter.view.addAddresses
+package com.example.utilitycounter.view.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,11 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.utilitycounter.R
+import com.example.utilitycounter.interfaces.ItemClickListener
 import com.example.utilitycounter.model.AddressModel
 
 class AdapterAddresses :
     Adapter<AdapterAddresses.AddressesViewHolder>() {
     private var emptyList = ArrayList<AddressModel>()
+    var itemClickListener: ItemClickListener? = null
 
     class AddressesViewHolder(itemView: View) : ViewHolder(itemView) {
         val nameOfAddress: TextView = itemView.findViewById(R.id.item_addresses_name)
@@ -27,9 +29,6 @@ class AdapterAddresses :
         return list
     }
 
-    fun getInfoList(): Boolean {
-        return emptyList.isEmpty()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressesViewHolder {
         val holder =
@@ -43,6 +42,9 @@ class AdapterAddresses :
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AddressesViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            itemClickListener?.onItemClick(position)
+        }
         val nameOfAddress = emptyList[position].street
         val numberOfBuild = "Будинок ${emptyList[position].numberOfBuild}, "
         val numberOfApartment = "кв. ${emptyList[position].numberOfApartment}"

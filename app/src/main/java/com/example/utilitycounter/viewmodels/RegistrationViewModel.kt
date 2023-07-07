@@ -1,4 +1,4 @@
-package com.example.utilitycounter.viewmodel
+package com.example.utilitycounter.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -23,9 +23,4 @@ class RegistrationViewModel(private val authRepo: AuthRepo) : ViewModel() {
         return _singUpSuccess
     }
 
-    fun logOut(){
-        viewModelScope.launch {
-            authRepo.logout()
-        }
-    }
 }
